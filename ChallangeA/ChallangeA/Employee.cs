@@ -12,7 +12,19 @@ namespace ChallangeA
 
         public void AddGrade(int grade)
         {
+            if (grade < 0) return;
             this.grades.Add(grade);
+        }
+        
+        /// <summary>
+        ///  Add minus number to Employee grades
+        /// </summary>
+        /// <param name="penalty">this param must be negative otherwise it does nothing</param>
+        public void addPenalty(int penalty) 
+        {
+            if (penalty >= 0) return;
+            else
+                this.grades.Add(penalty);
         }
         
         public void PrintGrades()
