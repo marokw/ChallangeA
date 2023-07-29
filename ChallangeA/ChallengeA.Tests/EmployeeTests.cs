@@ -26,7 +26,7 @@ namespace ChallangeA.Tests
             var user = new Employee();
             user.AddGrade(5);
             user.AddGrade(6);
-            user.addPenalty(-4);
+            user.AddPenalty(-4);
 
             // act
             var result = user.GradesSum;
@@ -41,7 +41,7 @@ namespace ChallangeA.Tests
             var user = new Employee();
             user.AddGrade(5);
             user.AddGrade(6);
-            user.addPenalty(4);
+            user.AddPenalty(4);
 
             // act
             var result = user.GradesSum;

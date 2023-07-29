@@ -10,9 +10,10 @@ namespace ChallangeA
             this.Age = age;
         }
 
-        public void AddGrade(int grade)
+        public void AddGrade(float grade)
         {
-            if (grade < 0) return;
+            if (grade < 0.0f) return;
+
             this.grades.Add(grade);
         }
         
@@ -20,11 +21,11 @@ namespace ChallangeA
         ///  Add minus number to Employee grades
         /// </summary>
         /// <param name="penalty">this param must be negative otherwise it does nothing</param>
-        public void addPenalty(int penalty) 
+        public void AddPenalty(float penalty) 
         {
-            if (penalty >= 0) return;
-            else
-                this.grades.Add(penalty);
+            if (penalty >= 0.0f) return;
+            
+            this.grades.Add(penalty);
         }
         
         public void PrintGrades()
@@ -33,6 +34,25 @@ namespace ChallangeA
             foreach (int grade in grades)
                 Console.Write(grade + ",");
             Console.WriteLine(")");
+        }
+
+        public Statistics GetStatistics()
+        {
+            var stats = new Statistics();
+            stats.Average = 0;
+            stats.Max = float.MinValue;
+            stats.Min = float.MaxValue;
+
+            foreach(var grade in this.grades)
+            {
+                stats.Max = Math.Max(stats.Max, grade);
+                stats.Min = Math.Min(stats.Min, grade);
+                stats.Average += grade;
+            }
+
+            stats.Average /= this.grades.Count;
+
+            return stats;
         }
 
         public string Name { get; }
@@ -45,11 +65,11 @@ namespace ChallangeA
         {
             get
             {
-                return this.grades.Sum();
+                return (int)this.grades.Sum();
             }
         }
 
-        private List<int> grades = new List<int>();
+        private List<float> grades = new List<float>();
 
     }
 
