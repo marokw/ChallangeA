@@ -18,7 +18,7 @@ namespace ChallangeA
         }
         
         /// <summary>
-        ///  Add minus number to Employee grades
+        ///  Add negative number to Employee grades
         /// </summary>
         /// <param name="penalty">this param must be negative otherwise it does nothing</param>
         public void AddPenalty(float penalty) 
