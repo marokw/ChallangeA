@@ -12,11 +12,38 @@ namespace ChallangeA
 
         public void AddGrade(float grade)
         {
-            if (grade < 0.0f) return;
+            if (grade >= 0.0f && grade <= 100.0f)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine($"[{grade}] -- Invalid grade value");
+            }
 
-            this.grades.Add(grade);
         }
-        
+        public void AddGrade(string grade)
+        {
+            if( float.TryParse(grade, out float result) )
+                AddGrade(result);
+            else
+            {
+                Console.WriteLine($"[{grade}] -- Value is not a number");
+            }
+        }
+        public void AddGrade(double grade)
+        {
+            AddGrade((float)grade);
+        }
+        public void AddGrade(int grade)
+        {
+            AddGrade((float)grade);
+        }
+        public void AddGrade(long grade)
+        {
+            AddGrade((float)grade);
+        }
+
         /// <summary>
         ///  Add negative number to Employee grades
         /// </summary>
