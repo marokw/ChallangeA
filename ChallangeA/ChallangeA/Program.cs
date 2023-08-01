@@ -1,17 +1,25 @@
 ﻿using ChallangeA;
 
-var emp = new Employee("Adam", "Kamizelich");
-emp.AddGrade(2);
-emp.AddGrade("2");
-emp.AddGrade(" 3 ");
-emp.AddGrade("Wojtek");
-emp.AddGrade(3246);
-emp.AddGrade(2.3d);
-emp.AddGrade(2);
-emp.AddGrade(6);
-var stats = emp.GetStatistics();
-Console.WriteLine($"Average: {stats.Average:N2}" );
-Console.WriteLine($"Min: {stats.Min}" );
-Console.WriteLine($"Max: {stats.Max}" );
+Console.WriteLine("Witamy w Programie XYZ do oceny Pracowników");
+Console.WriteLine("===========================================");
+Console.WriteLine();
+//Console.WriteLine("Podaj ocenę pracownika: ");
 
-Console.ReadLine();
+var employee = new Employee("Adam", "Kamizelich");
+
+Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
+
+string input = "";
+while ( (input = Console.ReadLine()) != "q")
+{
+    employee.AddGrade(input);
+
+    Console.WriteLine("Podaj kolejną ocenę pracownika: ");
+}
+
+
+var stats = employee.GetStatistics();
+Console.WriteLine($"Average: {stats.Average:N2}");
+Console.WriteLine($"AverageLetter: {stats.AverageLetter}");
+Console.WriteLine($"Min: {stats.Min}");
+Console.WriteLine($"Max: {stats.Max}");
