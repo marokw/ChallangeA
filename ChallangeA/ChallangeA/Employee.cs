@@ -1,13 +1,11 @@
 ﻿
 namespace ChallangeA
 {
-    public class Employee
+    public class Employee : Person
     {
         public Employee(string Name = "-", string Surname= "-", uint age = 0)
+            : base(Name,Surname,age)
         {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Age = age;
         }
 
         public void AddGrade(float grade)
@@ -131,12 +129,6 @@ namespace ChallangeA
             return stats;
         }
 
-        public string Name { get; }
-
-        public string Surname { get; }
-
-        public uint   Age { get; }
-
         public int GradesSum
         {
             get
@@ -145,7 +137,7 @@ namespace ChallangeA
             }
         }
 
-        private List<float> grades { get; } = new List<float>() ;
+        private List<float> grades = new List<float>() ;
 
         public List<float> Grades { get { return grades; } } 
 
