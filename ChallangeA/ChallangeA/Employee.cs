@@ -18,7 +18,7 @@ namespace ChallangeA
             }
             else
             {
-                Console.WriteLine($"[{grade}] -- Invalid grade value");
+                throw new Exception($"[{grade}] -- Invalid grade value");
             }
 
         }
@@ -30,7 +30,7 @@ namespace ChallangeA
                 AddGrade(result2);
             else
             {
-                Console.WriteLine($"[{grade}] -- Value is not a number");
+                throw new Exception($"[{grade}] -- Value is not a number");
             }
         }
 
@@ -59,8 +59,8 @@ namespace ChallangeA
                     this.grades.Add(20);
                     break;
                 default:
-                    Console.WriteLine($"[{grade}] -- Wrong Letter");
-                    break;
+                    throw new Exception($"[{grade}] -- Wrong Letter");
+                    //break;
 
             }
         }
@@ -85,13 +85,13 @@ namespace ChallangeA
             this.grades.Add(penalty);
         }
         
-        public void PrintGrades()
-        {
-            Console.Write("(");
-            foreach (int grade in grades)
-                Console.Write(grade + ",");
-            Console.WriteLine(")");
-        }
+        //public void PrintGrades()
+        //{
+        //    Console.Write("(");
+        //    foreach (int grade in grades)
+        //        Console.Write(grade + ",");
+        //    Console.WriteLine(")");
+        //}
 
         public Statistics GetStatistics()
         {
@@ -145,7 +145,9 @@ namespace ChallangeA
             }
         }
 
-        private List<float> grades = new List<float>();
+        private List<float> grades { get; } = new List<float>() ;
+
+        public List<float> Grades { get { return grades; } } 
 
     }
 

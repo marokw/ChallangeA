@@ -12,13 +12,22 @@ Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}"
 string input = "";
 while ( (input = Console.ReadLine()) != "q")
 {
-    employee.AddGrade(input);
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch(Exception e)
+    {
+        Console.WriteLine("Exception catched!");
+        Console.WriteLine($"{e.Message}");
+    }
 
     Console.WriteLine("Podaj kolejną ocenę pracownika: ");
 }
 
 
-var stats = employee.GetStatistics();
+var stats = employee.GetStatistics(); 
+Console.WriteLine($"Grades Count: {employee.Grades.Count:N0}");
 Console.WriteLine($"Average: {stats.Average:N2}");
 Console.WriteLine($"AverageLetter: {stats.AverageLetter}");
 Console.WriteLine($"Min: {stats.Min}");
