@@ -5,16 +5,19 @@ Console.WriteLine("===========================================");
 Console.WriteLine();
 //Console.WriteLine("Podaj ocenę pracownika: ");
 
-var employee = new Employee("Adam", "Kamizelich");
+//var employee = new Employee("Adam", "Kamizelich");
+var employee = new Supervisor("Adam", "Kamizelich");
 
-Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
+Console.WriteLine($"Podaj ocenę przełożonego: {employee.Name} {employee.Surname}");
+//Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
 
-string input = "";
-while ( (input = Console.ReadLine()) != "q")
+string? input;
+while ((input = Console.ReadLine()) != "q")
 {
     try
     {
-        employee.AddGrade(input);
+        if(input != null)   
+            employee.AddGrade(input);
     }
     catch(Exception e)
     {

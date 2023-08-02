@@ -1,0 +1,145 @@
+﻿namespace ChallangeA
+{
+    public class Supervisor : IEmployee
+    {
+        public string Name { get; }
+        public string Surname { get; }
+        public uint Age { get; }
+
+        private List<float> grades = new List<float>();
+
+        public List<float> Grades { get { return grades; } }
+
+        public Supervisor(string Name = "-", string Surname = "-", uint age = 0)
+        {
+            this.Name = Name;
+            this.Surname = Surname;
+            this.Age = age;
+        }
+
+        public void AddGrade(float grade)
+        {
+            if (grade >= 0.0f && grade <= 100.0f)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                throw new Exception($"[{grade}] -- Invalid grade value");
+            }
+
+        }
+
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result) && result > 6)
+                AddGrade(result);
+            else
+            {
+                bool isPlus = grade.Contains('+');
+                bool isMinus = grade.Contains('-');
+                if (isPlus && isMinus)
+                {
+                    throw new Exception("Grade can't have both (+) i (-) !");
+                }
+                var trimgedGade = grade.Trim(new char[] { '+', '-', ' ' });
+                int pointsForGrade;
+                switch (trimgedGade)
+                {
+                    case "6":
+                        pointsForGrade = 100;
+                        break;
+                    case "5":
+                        pointsForGrade = 80;
+                        break;
+                    case "4":
+                        pointsForGrade = 60;
+                        break;
+                    case "3":
+                        pointsForGrade = 40;
+                        break;
+                    case "2":
+                        pointsForGrade = 20;
+                        break;
+                    case "1":
+                        pointsForGrade = 0;
+                        break;
+                    default:
+                        throw new Exception("Wrong grade. Should be grade 1-6 (with additional + or - ) or number in 0-100 range");
+                }
+                if (isPlus)
+                    pointsForGrade += 5;
+                else if (isMinus)
+                    pointsForGrade -= 5;
+
+                AddGrade(Math.Clamp(pointsForGrade, 0, 100));
+            }
+        }
+        public void AddGrade(char grade)
+        {
+            AddGrade((float)grade);
+        }
+
+        public void AddGrade(double grade)
+        {
+            AddGrade((float)grade);
+        }
+        public void AddGrade(int grade)
+        {
+            AddGrade((float)grade);
+        }
+        public void AddGrade(long grade)
+        {
+            AddGrade((float)grade);
+        }
+
+        public void AddPenalty(float penalty)
+        {
+            if (penalty < 0.0f)
+                this.grades.Add(penalty);
+            else
+                throw new Exception($"[{penalty}] -- Penalty should be negative a number!");
+        }   
+
+        public Statistics GetStatistics()
+        {
+            var stats = new Statistics();
+            stats.Average = 0;
+            stats.Max = float.MinValue;
+            stats.Min = float.MaxValue;
+
+            foreach (var grade in this.grades)
+            {
+                stats.Max = Math.Max(stats.Max, grade);
+                stats.Min = Math.Min(stats.Min, grade);
+                stats.Average += grade;
+            }
+
+            stats.Average /= this.grades.Count;
+
+            switch (stats.Average)
+            {
+                case var average when average > 90:
+                    stats.AverageLetter = '6';
+                    break;
+                case var average when average > 70:
+                    stats.AverageLetter = '5';
+                    break;
+                case var average when average > 50:
+                    stats.AverageLetter = '4';
+                    break;
+                case var average when average > 30:
+                    stats.AverageLetter = '3';
+                    break;
+                case var average when average > 10:
+                    stats.AverageLetter = '2';
+                    break;
+                default:
+                    stats.AverageLetter = '1';
+                    break;
+            }
+
+            return stats;
+        }
+    }
+}

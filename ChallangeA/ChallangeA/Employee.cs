@@ -1,12 +1,29 @@
 ﻿
+using System.Diagnostics;
+
 namespace ChallangeA
 {
-    public class Employee : Person
+    public class Employee : IEmployee
     {
-        public Employee(string Name = "-", string Surname= "-", uint age = 0)
-            : base(Name,Surname,age)
+        public string Name { get; }
+
+        public string Surname { get; }
+
+        public uint Age { get; }
+
+        private List<float> grades = new List<float>();
+
+        public Employee(string Name = "-", string Surname = "-", uint age = 0)
         {
+            this.Name = Name;
+            this.Surname = Surname;
+            this.Age = age;
         }
+
+        //public Employee(string Name = "-", string Surname= "-", uint age = 0)
+        //    : base(Name,Surname,age)
+        //{
+        //}
 
         public void AddGrade(float grade)
         {
@@ -78,18 +95,19 @@ namespace ChallangeA
 
         public void AddPenalty(float penalty) 
         {
-            if (penalty >= 0.0f) return;
-            
-            this.grades.Add(penalty);
+            if (penalty < 0.0f) 
+                this.grades.Add(penalty);
+            else
+                throw new Exception($"[{penalty}] -- Penalty should be negative a number!");
         }
-        
-        //public void PrintGrades()
-        //{
-        //    Console.Write("(");
-        //    foreach (int grade in grades)
-        //        Console.Write(grade + ",");
-        //    Console.WriteLine(")");
-        //}
+
+        public void PrintGrades()
+        {
+            Console.Write("(");
+            foreach (int grade in grades)
+                Console.Write(grade + ",");
+            Console.WriteLine(")");
+        }
 
         public Statistics GetStatistics()
         {
@@ -137,9 +155,6 @@ namespace ChallangeA
             }
         }
 
-        private List<float> grades = new List<float>() ;
-
-        public List<float> Grades { get { return grades; } } 
 
     }
 
