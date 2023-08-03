@@ -64,9 +64,9 @@ namespace ChallangeA.Tests
             Assert.AreEqual(employee1, employee2);
         }
 
-        private Employee GetEmployee(string name, string surname, uint age = 0)
+        private EmployeeInMemory GetEmployee(string name, string surname, uint age = 0)
         {
-            return new Employee(name, surname, age);
+            return new EmployeeInMemory(name, surname, age);
         }
     }
 }

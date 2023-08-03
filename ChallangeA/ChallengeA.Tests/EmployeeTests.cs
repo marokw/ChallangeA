@@ -8,7 +8,7 @@ namespace ChallangeA.Tests
         public void WhenUserCollectTwoSetOfPoints_ShouldReturnCorrectSum()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade(5);
             user.AddGrade(6);
 
@@ -23,7 +23,7 @@ namespace ChallangeA.Tests
         public void WhenUserCollectTwoSetOfPointsAndPenalty_ShouldReturnCorrectSum()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade(5);
             user.AddGrade(6);
             user.AddPenalty(-4);
@@ -38,7 +38,7 @@ namespace ChallangeA.Tests
         public void WhenUserCollectTwoSetOfPointsAndPositivePnalty_ShouldReturnCorrectSumWithoutPenalty()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade(5);
             user.AddGrade(6);
             user.AddPenalty(4);
@@ -55,7 +55,7 @@ namespace ChallangeA.Tests
         public void WhenCountedAverage_ShouldReturnAverageLetterAsCapitalLetter()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade(50);
             user.AddGrade(60);
             user.AddPenalty(40);
@@ -71,7 +71,7 @@ namespace ChallangeA.Tests
         public void WhenAddedSmallCharAsGrade_ShouldAddCorrespondingGrade()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade('c');
 
             // act
@@ -92,7 +92,7 @@ namespace ChallangeA.Tests
         public void WhenCalculatingAverageGrade_ShouldGetStatisticReturnAverageLetterCorrespodingToGrade()
         {
             // arrange
-            var user = new Employee();
+            var user = new EmployeeInMemory();
             user.AddGrade(50);
             user.AddGrade(60);
             user.AddGrade("d");

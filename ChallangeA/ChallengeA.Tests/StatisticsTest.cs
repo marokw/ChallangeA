@@ -8,7 +8,7 @@ namespace ChallangeA.Tests
         public void WhenGetStatistics_ShouldReturnCorrectMax()
         {
             //Arrange
-            var employee1 = new Employee("Adam", "Smith", 33);
+            var employee1 = new EmployeeInMemory("Adam", "Smith", 33);
 
             employee1.AddGrade(4);
             employee1.AddGrade(-2);
@@ -27,7 +27,7 @@ namespace ChallangeA.Tests
         public void WhenGetStatistics_ShouldReturnCorrectMin()
         {
             //Arrange
-            var employee1 = new Employee("Adam", "Smith", 33);
+            var employee1 = new EmployeeInMemory("Adam", "Smith", 33);
 
             employee1.AddGrade(4);
             employee1.AddGrade(-2);
@@ -45,7 +45,7 @@ namespace ChallangeA.Tests
         public void WhenGetStatistics_ShouldReturnCorrectAverage()
         {
             //Arrange
-            var employee1 = new Employee("Adam", "Smith", 33);
+            var employee1 = new EmployeeInMemory("Adam", "Smith", 33);
 
             employee1.AddGrade(4);
             employee1.AddGrade(-2);

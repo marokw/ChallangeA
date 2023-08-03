@@ -16,5 +16,6 @@
         void AddPenalty(float penalty);
 
         public Statistics GetStatistics();
+
     }
 }

@@ -1,23 +1,17 @@
 ﻿namespace ChallangeA
 {
-    public class Supervisor : IEmployee
+    public class Supervisor : EmployeeBase
     {
-        public string Name { get; }
-        public string Surname { get; }
-        public uint Age { get; }
-
         private List<float> grades = new List<float>();
 
         public List<float> Grades { get { return grades; } }
 
         public Supervisor(string Name = "-", string Surname = "-", uint age = 0)
+            : base (Name, Surname, age)
         {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Age = age;
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0.0f && grade <= 100.0f)
             {
@@ -30,7 +24,7 @@
 
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result) && result > 6)
                 AddGrade(result);
@@ -75,25 +69,25 @@
                 AddGrade(Math.Clamp(pointsForGrade, 0, 100));
             }
         }
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             AddGrade((float)grade);
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             AddGrade((float)grade);
         }
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             AddGrade((float)grade);
         }
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             AddGrade((float)grade);
         }
 
-        public void AddPenalty(float penalty)
+        public override void AddPenalty(float penalty)
         {
             if (penalty < 0.0f)
                 this.grades.Add(penalty);
@@ -101,7 +95,7 @@
                 throw new Exception($"[{penalty}] -- Penalty should be negative a number!");
         }   
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var stats = new Statistics();
             stats.Average = 0;

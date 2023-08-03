@@ -5,21 +5,19 @@ Console.WriteLine("===========================================");
 Console.WriteLine();
 //Console.WriteLine("Podaj ocenę pracownika: ");
 
-//var employee = new Employee("Adam", "Kamizelich");
-var employee = new Supervisor("Adam", "Kamizelich");
+var employee = new EmployeeInFile("Adam", "Kamizelich");
 
-Console.WriteLine($"Podaj ocenę przełożonego: {employee.Name} {employee.Surname}");
-//Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
+Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
 
 string? input;
 while ((input = Console.ReadLine()) != "q")
 {
     try
     {
-        if(input != null)   
+        if (input != null)
             employee.AddGrade(input);
     }
-    catch(Exception e)
+    catch (Exception e)
     {
         Console.WriteLine("Exception catched!");
         Console.WriteLine($"{e.Message}");
@@ -30,7 +28,7 @@ while ((input = Console.ReadLine()) != "q")
 
 
 var stats = employee.GetStatistics(); 
-Console.WriteLine($"Grades Count: {employee.Grades.Count:N0}");
+Console.WriteLine($"Grades Count: {employee.GradesCount:N0}");
 Console.WriteLine($"Average: {stats.Average:N2}");
 Console.WriteLine($"AverageLetter: {stats.AverageLetter}");
 Console.WriteLine($"Min: {stats.Min}");

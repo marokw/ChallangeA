@@ -1,31 +1,30 @@
-﻿
-using System.Diagnostics;
-
-namespace ChallangeA
+﻿namespace ChallangeA
 {
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-        public string Name { get; }
-
-        public string Surname { get; }
-
-        public uint Age { get; }
-
         private List<float> grades = new List<float>();
-
-        public Employee(string Name = "-", string Surname = "-", uint age = 0)
+        
+        public int GradesSum
         {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Age = age;
+            get
+            {
+                return (int)this.grades.Sum();
+            }
+        }
+        public int GradesCount
+        {
+            get
+            {
+                return (int)this.grades.Count;
+            }
         }
 
-        //public Employee(string Name = "-", string Surname= "-", uint age = 0)
-        //    : base(Name,Surname,age)
-        //{
-        //}
+        public EmployeeInMemory(string name = "-", string surname = "-", uint age = 0)
+            : base(name, surname, age)
+        {
+        }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0.0f && grade <= 100.0f)
             {
@@ -37,9 +36,9 @@ namespace ChallangeA
             }
 
         }
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
-            if( float.TryParse(grade, out float result) )
+            if (float.TryParse(grade, out float result))
                 AddGrade(result);
             else if (char.TryParse(grade, out char result2))
                 AddGrade(result2);
@@ -49,9 +48,9 @@ namespace ChallangeA
             }
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
-            switch(grade)
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -80,22 +79,22 @@ namespace ChallangeA
             }
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             AddGrade((float)grade);
         }
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             AddGrade((float)grade);
         }
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             AddGrade((float)grade);
         }
 
-        public void AddPenalty(float penalty) 
+        public override void AddPenalty(float penalty)
         {
-            if (penalty < 0.0f) 
+            if (penalty < 0.0f)
                 this.grades.Add(penalty);
             else
                 throw new Exception($"[{penalty}] -- Penalty should be negative a number!");
@@ -109,14 +108,14 @@ namespace ChallangeA
             Console.WriteLine(")");
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var stats = new Statistics();
             stats.Average = 0;
             stats.Max = float.MinValue;
             stats.Min = float.MaxValue;
 
-            foreach(var grade in this.grades)
+            foreach (var grade in this.grades)
             {
                 stats.Max = Math.Max(stats.Max, grade);
                 stats.Min = Math.Min(stats.Min, grade);
@@ -125,7 +124,7 @@ namespace ChallangeA
 
             stats.Average /= this.grades.Count;
 
-            switch(stats.Average)
+            switch (stats.Average)
             {
                 case var average when average > 80:
                     stats.AverageLetter = 'A';
@@ -147,15 +146,5 @@ namespace ChallangeA
             return stats;
         }
 
-        public int GradesSum
-        {
-            get
-            {
-                return (int)this.grades.Sum();
-            }
-        }
-
-
     }
-
 }
