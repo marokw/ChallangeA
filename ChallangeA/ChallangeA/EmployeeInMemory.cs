@@ -3,7 +3,9 @@
     public class EmployeeInMemory : EmployeeBase
     {
         private List<float> grades = new List<float>();
-        
+
+        public override event GradeAddedDelegate GradeAdded;
+
         public int GradesSum
         {
             get
@@ -29,6 +31,8 @@
             if (grade >= 0.0f && grade <= 100.0f)
             {
                 this.grades.Add(grade);
+
+                GradeAdded?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -50,33 +54,37 @@
 
         public override void AddGrade(char grade)
         {
+            float numberToAdd = 0.0f;
+
             switch (grade)
             {
                 case 'A':
                 case 'a':
-                    this.grades.Add(100);
+                    numberToAdd = 100;
                     break;
                 case 'B':
                 case 'b':
-                    this.grades.Add(80);
+                    numberToAdd = 80;
                     break;
                 case 'C':
                 case 'c':
-                    this.grades.Add(60);
+                    numberToAdd = 60;
                     break;
                 case 'D':
                 case 'd':
-                    this.grades.Add(40);
+                    numberToAdd = 40;
                     break;
                 case 'E':
                 case 'e':
-                    this.grades.Add(20);
+                    numberToAdd = 20;
                     break;
                 default:
                     throw new Exception($"[{grade}] -- Wrong Letter");
                     //break;
 
             }
+
+            AddGrade(numberToAdd);
         }
 
         public override void AddGrade(double grade)

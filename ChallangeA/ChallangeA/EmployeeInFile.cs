@@ -5,24 +5,13 @@ namespace ChallangeA
     public class EmployeeInFile : EmployeeBase
     {
         private const string fileName = "grades.txt";
-
         private float gradesSum;
         private uint gradesCount;
 
-        public int GradesSum
-        {
-            get
-            {
-                return (int)this.gradesSum;
-            }
-        }
-        public int GradesCount
-        {
-            get
-            {
-                return (int)this.gradesCount;
-            }
-        }
+        public override event GradeAddedDelegate GradeAdded;
+
+        public int GradesSum {get {return (int)this.gradesSum; } }
+        public int GradesCount { get {return (int)this.gradesCount; } }
 
 
         public EmployeeInFile(string name = "-", string surname = "-", uint age = 0)
@@ -46,6 +35,8 @@ namespace ChallangeA
             using (var writer = File.AppendText(fileName))
             {
                 writer.WriteLine(gradeToAdd);
+
+                GradeAdded?.Invoke(this, EventArgs.Empty);
             }
         }
 

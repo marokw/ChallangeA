@@ -3,9 +3,15 @@
 Console.WriteLine("Witamy w Programie XYZ do oceny Pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
-//Console.WriteLine("Podaj ocenę pracownika: ");
 
-var employee = new EmployeeInFile("Adam", "Kamizelich");
+//var employee = new EmployeeInFile("Adam", "Kamizelich");
+var employee = new EmployeeInMemory("Adam", "Kamizelich");
+employee.GradeAdded += EmployeeGradeAdded;
+
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę");
+}
 
 Console.WriteLine($"Podaj ocenę pracownika: {employee.Name} {employee.Surname}");
 

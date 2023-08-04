@@ -1,4 +1,6 @@
-﻿namespace ChallangeA
+﻿using static ChallangeA.EmployeeBase;
+
+namespace ChallangeA
 {
     public interface IEmployee
     {
@@ -14,6 +16,8 @@
         void AddGrade(long grade);
 
         void AddPenalty(float penalty);
+
+        event GradeAddedDelegate GradeAdded;
 
         public Statistics GetStatistics();
 

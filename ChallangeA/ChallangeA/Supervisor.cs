@@ -4,6 +4,7 @@
     {
         private List<float> grades = new List<float>();
 
+        public override event GradeAddedDelegate GradeAdded;
         public List<float> Grades { get { return grades; } }
 
         public Supervisor(string Name = "-", string Surname = "-", uint age = 0)
@@ -16,6 +17,8 @@
             if (grade >= 0.0f && grade <= 100.0f)
             {
                 this.grades.Add(grade);
+
+                GradeAdded?.Invoke(this, EventArgs.Empty);
             }
             else
             {
