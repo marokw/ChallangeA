@@ -100,40 +100,11 @@
 
         public override Statistics GetStatistics()
         {
-            var stats = new Statistics();
-            stats.Average = 0;
-            stats.Max = float.MinValue;
-            stats.Min = float.MaxValue;
+            var stats = new StatisticsForSupervisor();
 
             foreach (var grade in this.grades)
             {
-                stats.Max = Math.Max(stats.Max, grade);
-                stats.Min = Math.Min(stats.Min, grade);
-                stats.Average += grade;
-            }
-
-            stats.Average /= this.grades.Count;
-
-            switch (stats.Average)
-            {
-                case var average when average > 90:
-                    stats.AverageLetter = '6';
-                    break;
-                case var average when average > 70:
-                    stats.AverageLetter = '5';
-                    break;
-                case var average when average > 50:
-                    stats.AverageLetter = '4';
-                    break;
-                case var average when average > 30:
-                    stats.AverageLetter = '3';
-                    break;
-                case var average when average > 10:
-                    stats.AverageLetter = '2';
-                    break;
-                default:
-                    stats.AverageLetter = '1';
-                    break;
+                stats.AddGrade(grade);
             }
 
             return stats;

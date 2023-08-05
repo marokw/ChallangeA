@@ -5,7 +5,8 @@
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
         
         public abstract event GradeAddedDelegate GradeAdded;
-
+        public int GradesSum { get { return (int)GetStatistics().GradesSum; } }
+        public int GradesCount { get { return (int)GetStatistics().GradesCount; } }
         public EmployeeBase(string name, string surname, uint age)
         {
             Name = name;
@@ -16,8 +17,6 @@
         public string Name { get; private set; }
         public string Surname { get; private set; }
         public uint Age { get; private set; }
-        public int GradesSum { get; }
-        public int GradesCount { get; }
 
         public abstract void AddGrade(float grade);
 
