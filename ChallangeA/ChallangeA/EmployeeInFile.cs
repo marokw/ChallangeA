@@ -15,20 +15,17 @@ namespace ChallangeA
 
         public override void AddGrade(float grade)
         {
-            float gradeToAdd = -999.9f;
             if (grade >= 0.0f && grade <= 100.0f)
             {
-                gradeToAdd = grade;
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                    GradeAdded?.Invoke(this, EventArgs.Empty);
+                }
             }
             else
             {
                 throw new Exception($"[{grade}] -- Invalid grade value");
-            }
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(gradeToAdd);
-
-                GradeAdded?.Invoke(this, EventArgs.Empty);
             }
         }
 
